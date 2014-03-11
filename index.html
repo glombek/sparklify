@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>sparklify.js</title>
+    <meta name="viewport" content="width=device-width">
+    
+    <link href="//joe.gl/j2/code/style/grid|theme=greytile" rel="stylesheet">
+    <link href="style.css" rel="stylesheet">
+</head>
+<body ontouchstart="">
+    <!-- OnTouchStart makes iOS listen to CSS pseudo-classes. -->
+    <header>
+        <h1>sparklify.js</h1>
+        <nav tabindex="1">
+            <!-- Tabindex makes it selectable so we aren't reliant on hover for mobiles. -->
+            <ul>
+                <li><a href="/">Home</a></li>
+            </ul>
+        </nav>
+    </header>
+    <article>
+        <aside>
+            <img id="laptop" class="sparkle" src="http://i.imgur.com/ao38q2G.png" alt="No sparkles for you!">
+        </aside>
+        <aside>
+            <h2>See how it sparkles!</h2>
+            <p>sparklify.js creates 90's "glittery GIF" style animations from plain images. It uses HTML5 Canvas to do so.</p>
+        </aside>
+        <section>
+            <h2>Using sparklify.js</h2>
+            <p>Please <strong>do not use sparklify.js</strong>. It sucks. It <em>really</em> sucks.</p>
+            <p>It's more a proof-of-concept/pointless project than something of actual use.</p>
+            <p>If you must use it, <a href="sparklify.js" download="sparklify.js">download the script here</a> and embed it into your page.</p>
+            <p>
+                To replace an image with its equivalent glitter-canvas, do something like the following.
+                <pre>
+$(function() {
+    $(".sparkle").sparklify();
+});
+                </pre>
+            You can also specify options.
+            <pre>
+$(function() {
+    $(".sparkle").sparklify({
+        intensity: 1, //How many sparkles to generate (relative)
+        speed: 10, //Number of sparkles per second.
+        color: "white", //Colour of the sparkles
+        size: 6, //Size of the sparkles in pixels
+        symbols: ["+", "*","★","●"] //The symbols to use as sparkles
+    );
+});
+                </pre>
+            </p>
+        </section>
+    </article>
+    <footer>© Joe Glombek 2014 | <a href="http://joe.gl/j2">j²</a></footer>
+</body>
+    <script src="http://code.jquery.com/jquery-2.1.0.min.js"></script>
+    <script src="sparklify.js"></script>
+    <script>
+        $(function() {
+            $(".sparkle").sparklify({ intensity: 1, speed: 11 });
+        });
+    </script>
+</html>
+    
