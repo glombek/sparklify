@@ -1,3 +1,13 @@
+/*
+
+★ sparklify.js ★
+
+http://sparklify.joe.gl
+
+By http://joe.gl/ombek
+
+*/
+
 (function ( $ ) {
     $.fn.sparklify = function(options) {
         this.each(function(n, img) {
