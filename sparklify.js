@@ -8,11 +8,11 @@
           if(options.size == undefined) options.size = 6;
           if(options.symbols == undefined) options.symbols = ["+", "*","★","●"];
           if(options.color == undefined) options.color = "white";
-
+          if(options.glow == undefined) options.glow = 0;
 
           var $canvas = $("<canvas></canvas>");
           $canvas.text($img.attr("alt"));
-          $canvas.data("sparklify", { img: img, $img: $img, options: options });
+         
           var id = $img.attr("id");
           $img.attr("id", "orig_" + id);
           $canvas.attr("id", id);
@@ -23,7 +23,9 @@
           $img.hide();
           //$img.replaceWith($canvas);
           var ctx = canvas.getContext("2d");
-
+          var w = $img.width();
+          var h = $img.height();
+          $canvas.data("sparklify", { img: img, $img: $img, options: options, width: w, height: h, pixData: undefined });
 
           function rand(n) {
             return Math.floor(Math.random() * n) + 1
@@ -35,33 +37,37 @@
               var data = $canvas.data("sparklify");
               var canvas = $canvas[0];
               var ctx = canvas.getContext("2d");
-              //console.log([data.$img[0], $canvas[0], data.$img.width(), data.$img.height()]);
-            canvas.width = data.$img.width();
-            canvas.height = data.$img.height();
+              //console.log([data.$img[0], $canvas[0], data.width, data.$img.height()]);
+            canvas.width = data.width;
+            canvas.height = data.height;
             ctx.font = data.options.size + 'px';
             ctx.fillStyle = data.options.color;
-            ctx.shadowColor = data.options.color;
-            ctx.shadowOffsetX = 0;
-            ctx.shadowOffsetY = 0;
-            ctx.shadowBlur = 10;
+            if(data.options.glow != 0) {
+                ctx.shadowColor = data.options.color;
+                ctx.shadowOffsetX = 0;
+                ctx.shadowOffsetY = 0;
+                ctx.shadowBlur = data.options.glow;
+            }
 
-            var itterate = (data.$img.width() + data.$img.height())/data.options.symbols.length * data.options.intensity;
+            var itterate = (data.width + data.height)/data.options.symbols.length * data.options.intensity;
 
             function drawChars(indx, chr) {
               for (var i = 0; i < itterate; i++) {
-                var x = rand(data.$img.width());
-                var y = rand(data.$img.height());
+                var x = rand(data.width);
+                var y = rand(data.height);
 
-                var imgd = ctx.getImageData(x, y, 1, 1);
-                var pix = imgd.data;
-                if(pix[3] == 255) {
+                //var imgd = ctx.getImageData(x, y, 1, 1);
+                //var pixData = imgd.data;
+                  
+                if(data.pixData[((data.width * y) + x) * 4 + 3] == 255) {
+                    //if(pixData[3] == 255) {
                   ctx.fillText(chr, x, y);
                 }
               }
             }
 
-            ctx.drawImage(data.img, 0, 0, data.$img.width(), data.$img.height());
-
+            ctx.drawImage(data.img, 0, 0, data.width, data.height);
+            if(data.pixData === undefined) data.pixData = ctx.getImageData(0, 0, w, h).data;
             $.each(data.options.symbols, drawChars);
 
 
