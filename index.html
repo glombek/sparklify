@@ -36,31 +36,57 @@
             <p>If you must use it, <a href="sparklify.js" download="sparklify.js">download the script here</a> and embed it into your page after you've included jQuery. sparklify.js is a jQuery plugin and thus requires it.</p>
             <p>
                 To replace an image with its equivalent glitter-canvas, do something like the following.
-                <pre>
-$(".sparkle").sparklify();
-                </pre>
+                <pre>$(".sparkle").sparklify();</pre>
             You can also specify options.
-            <pre>
-$(".sparkle").sparklify({
+            <pre>$(".sparkle").sparklify({
     intensity: 1, //How many sparkles to generate (relative)
     speed: 10, //Number of sparkles per second.
     color: "white", //Colour of the sparkles
-     size: 6, //Size of the sparkles in pixels
-     symbols: ["+", "*","★","●"], //The symbols to use as sparkles,
+    size: 10, //Size of the sparkles in pixels
+    symbols: ["+", "*","★","●", "."], //The symbols to use as sparkles,
     glow: 0 //How many pixels of 'glow' to add to the sparkles - this slows down the process a lot!
-);
-                </pre>
+);</pre>
             </p>
         </section>
+        <aside class="imageContainer">
+            <img id="demo" class="sparkle" src="sample.png" alt="No sparkles for you!">
+        </aside>
+        <aside>
+            <h2>Demo</h2>
+            <fieldset>
+                <legend>Try it out for yourself</legend>
+                <label for="intensity">Intensity</label><input id="intensity" class="demoInput" type="number" value="1" step="0.1" min="0" />
+                <label for="speed">Speed (Hz)</label><input id="speed" class="demoInput" type="number" value="10" min="1" />
+                <label for="color">Colour</label><input id="color" class="demoInput" type="text" value="white" />
+                <label for="size">Char Size (px)</label><input id="size" class="demoInput" type="number" value="10" min="0" />
+                <label for="symbols">Symbols</label><input id="symbols" class="demoInput" type="text" value="+*★●." />
+                <label for="glow">Glow</label><input id="glow" class="demoInput" type="checkbox" /> 
+            </fieldset>
+        </aside>
     </article>
     <footer>© Joe Glombek 2014 | <a href="http://joe.gl/j2">j²</a></footer>
-</body>
+    
     <script src="http://code.jquery.com/jquery-2.1.0.min.js"></script>
     <script src="sparklify.js"></script>
     <script>
         $(function() {
-            $(".sparkle").sparklify({ intensity: 1, speed: 11 });
+            $(".sparkle").sparklify();
+            
+            function demoChange() {
+                var dat = $("#demo").data("sparklify");
+                dat.options = {
+                    intensity: $("#intensity").val(),
+                    speed: $("#speed").val(),
+                    color: $("#color").val(),
+                    size: $("#size").val(),
+                    symbols: $("#symbols").val().split(""),
+                    glow: $("#glow").is(":checked")
+                };
+                $("#demo").data("sparklify", dat);
+            }
+            $(".demoInput").change(demoChange).on("checked", demoChange)
         });
     </script>
+</body>
 </html>
     

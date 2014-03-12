@@ -13,10 +13,11 @@ By http://joe.gl/ombek
         this.each(function(n, img) {
 
           $img = $(img);
+          if(!options) options = {};
           if(options.intensity == undefined) options.intensity = 1;
           if(options.speed == undefined) options.speed = 10;
-          if(options.size == undefined) options.size = 6;
-          if(options.symbols == undefined) options.symbols = ["+", "*","★","●"];
+          if(options.size == undefined) options.size = 10;
+          if(options.symbols == undefined) options.symbols = ["+", "*","★","●","."];
           if(options.color == undefined) options.color = "white";
           if(options.glow == undefined) options.glow = 0;
 
@@ -50,14 +51,7 @@ By http://joe.gl/ombek
               //console.log([data.$img[0], $canvas[0], data.width, data.$img.height()]);
             canvas.width = data.width;
             canvas.height = data.height;
-            ctx.font = data.options.size + 'px';
-            ctx.fillStyle = data.options.color;
-            if(data.options.glow != 0) {
-                ctx.shadowColor = data.options.color;
-                ctx.shadowOffsetX = 0;
-                ctx.shadowOffsetY = 0;
-                ctx.shadowBlur = data.options.glow;
-            }
+            
 
             var itterate = (data.width + data.height)/data.options.symbols.length * data.options.intensity;
 
@@ -77,6 +71,15 @@ By http://joe.gl/ombek
             }
 
             ctx.drawImage(data.img, 0, 0, data.width, data.height);
+              
+              ctx.font = data.options.size + 'px sans-serif';
+            ctx.fillStyle = data.options.color;
+            if(data.options.glow != 0) {
+                ctx.shadowColor = data.options.color;
+                ctx.shadowOffsetX = 0;
+                ctx.shadowOffsetY = 0;
+                ctx.shadowBlur = data.options.glow;
+            }
             if(data.pixData === undefined) data.pixData = ctx.getImageData(0, 0, w, h).data;
             $.each(data.options.symbols, drawChars);
 
