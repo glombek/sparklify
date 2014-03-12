@@ -60,7 +60,7 @@
                 <label for="color">Colour</label><input id="color" class="demoInput" type="text" value="white" />
                 <label for="size">Char Size (px)</label><input id="size" class="demoInput" type="number" value="10" min="0" />
                 <label for="symbols">Symbols</label><input id="symbols" class="demoInput" type="text" value="+*★●." />
-                <label for="glow">Glow</label><input id="glow" class="demoInput" type="checkbox" /> 
+                <label for="glow">Glow</label><input id="glow" class="demoInput" type="number" value="0" min="0" /> 
             </fieldset>
         </aside>
     </article>
@@ -80,11 +80,11 @@
                     color: $("#color").val(),
                     size: $("#size").val(),
                     symbols: $("#symbols").val().split(""),
-                    glow: $("#glow").is(":checked")
+                    glow: $("#glow").val()
                 };
                 $("#demo").data("sparklify", dat);
             }
-            $(".demoInput").change(demoChange).on("checked", demoChange)
+            $(".demoInput").change(demoChange);//.on("checked", demoChange);
         });
     </script>
 </body>
