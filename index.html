@@ -35,7 +35,7 @@
             <p>Add sparkles to images on many websites with just the click of a button!</p>
             <p>
                 Drag this star-shaped "bookmarklet"
-                <a href='javascript:function addScript(src) {var s =document.createElement("script");s.src=src;document.head.insertBefore(s, document.head.firstChild);}if(document.jQuery === undefined)addScript("//code.jquery.com/jquery-2.1.0.min.js");setTimeout(function() { addScript("//joe.gl/ext/js/sparklify.js");setTimeout(function () { $("img").attr("crossorigin", "anonymous").sparklify(); } , 1000); }, 1000);' onclick="setTimeout(function(){alert('Drag me to your bookmark bar!');}, 0);return false;" class="button">★</a>
+                <a href='javascript:(function(){function addScript(src) {var s =document.createElement("script");s.src=src;document.head.insertBefore(s, document.head.firstChild);}if(document.jQuery === undefined)addScript("//code.jquery.com/jquery-2.1.0.min.js");setTimeout(function() { addScript("//joe.gl/ext/js/sparklify.js");setTimeout(function () { $("img").attr("crossorigin", "anonymous").sparklify(); } , 1000); }, 1000);})();' onclick="setTimeout(function(){alert('Drag me to your bookmark bar!');}, 0);return false;" class="button">★</a>
                 into your bookmarks/favourites bar and click away to add some sparkle to your browsing experience!
             </p>
         </aside>
