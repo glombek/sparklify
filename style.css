@@ -6,3 +6,13 @@
 {
     text-align:center;
 }
+
+.button{ 
+    background-color: #1e1e1e;
+    color: #eee;
+    text-decoration:none;
+    padding: 0 1ex;
+    border: 1px solid #1e1e1e;
+    
+    -webkit-border-radius:.3ex;-moz-border-radius:.3ex;border-radius:.3ex
+}
